@@ -1,0 +1,68 @@
+import { AlertTriangleIcon, DollarSignIcon, PackageIcon } from "lucide-react"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { formatCurrency, formatNumber } from "@/lib/format"
+import type { InventorySummary } from "@/lib/types"
+
+export function MetricCards({ summary }: { summary: InventorySummary }) {
+  const cards = [
+    {
+      label: "Total Inventory Value",
+      value: formatCurrency(summary.totalInventoryValue),
+      description: "Quantity on hand × unit price, across all SKUs",
+      icon: DollarSignIcon,
+    },
+    {
+      label: "Total SKUs",
+      value: formatNumber(summary.totalSkus),
+      description: "Unique items tracked in inventory",
+      icon: PackageIcon,
+    },
+    {
+      label: "Low-Stock Alerts",
+      value: formatNumber(summary.lowStockCount),
+      description: "Items at or below reorder threshold",
+      icon: AlertTriangleIcon,
+      alert: summary.lowStockCount > 0,
+    },
+  ]
+
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      {cards.map((card) => (
+        <Card key={card.label}>
+          <CardHeader>
+            <CardDescription>{card.label}</CardDescription>
+            <CardTitle
+              className={
+                card.alert
+                  ? "text-2xl text-amber-600 dark:text-amber-400"
+                  : "text-2xl"
+              }
+            >
+              {card.value}
+            </CardTitle>
+            <CardAction>
+              <card.icon
+                className={
+                  card.alert
+                    ? "size-5 text-amber-600 dark:text-amber-400"
+                    : "size-5 text-muted-foreground"
+                }
+              />
+            </CardAction>
+          </CardHeader>
+          <CardContent>
+            <p className="text-xs text-muted-foreground">{card.description}</p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  )
+}
