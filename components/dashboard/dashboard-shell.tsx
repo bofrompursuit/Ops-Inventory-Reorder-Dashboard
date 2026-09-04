@@ -54,16 +54,18 @@ export function DashboardShell({ initialData }: { initialData: GetInventoryResul
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <Header demoMode={demoMode} />
-        <main className="flex flex-1 flex-col gap-6 p-4 sm:p-6" id="overview">
+        <main className="flex flex-1 flex-col gap-6 p-4 sm:p-6">
           {demoMode && <DemoModeBanner reason={demoReason} />}
-          <MetricCards summary={summary} />
-          <div id="inventory">
+          <section id="overview" className="scroll-mt-20">
+            <MetricCards summary={summary} />
+          </section>
+          <section id="inventory" className="scroll-mt-20">
             <InventoryTable
               items={items}
               onUpdateQuantity={setQuantityTarget}
               onGenerateEmail={setEmailItems}
             />
-          </div>
+          </section>
         </main>
       </div>
 

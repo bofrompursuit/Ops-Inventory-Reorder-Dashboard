@@ -245,27 +245,28 @@ export function InventoryTable({
               const status = getInventoryStatus(item)
               const isLowStock = status === "low-stock"
               return (
-                <TableRow
-                  key={item.id}
-                  className={cn(
-                    isLowStock &&
-                      "bg-red-500/5 hover:bg-red-500/10 dark:bg-red-500/10 dark:hover:bg-red-500/15"
-                  )}
-                >
-                  <TableCell className="font-medium">{item.itemName}</TableCell>
+                <TableRow key={item.id}>
+                  <TableCell
+                    className={cn(
+                      "font-medium",
+                      isLowStock && "border-l-2 border-l-red-500 dark:border-l-red-500/80"
+                    )}
+                  >
+                    {item.itemName}
+                  </TableCell>
                   <TableCell className="font-mono text-xs text-muted-foreground">
                     {item.sku}
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right tabular-nums">
                     {formatNumber(item.quantity)}
                   </TableCell>
-                  <TableCell className="text-right text-muted-foreground">
+                  <TableCell className="text-right tabular-nums text-muted-foreground">
                     {formatNumber(item.reorderThreshold)}
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right tabular-nums">
                     {formatCurrency(item.unitPrice)}
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right tabular-nums">
                     {formatCurrency(getInventoryTotalValue(item))}
                   </TableCell>
                   <TableCell>

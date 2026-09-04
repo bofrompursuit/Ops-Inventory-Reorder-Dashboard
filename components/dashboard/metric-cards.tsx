@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 import { formatCurrency, formatNumber } from "@/lib/format"
 import type { InventorySummary } from "@/lib/types"
 
@@ -40,22 +41,24 @@ export function MetricCards({ summary }: { summary: InventorySummary }) {
           <CardHeader>
             <CardDescription>{card.label}</CardDescription>
             <CardTitle
-              className={
-                card.alert
-                  ? "text-2xl text-amber-600 dark:text-amber-400"
-                  : "text-2xl"
-              }
+              className={cn(
+                "text-2xl tabular-nums",
+                card.alert && "text-amber-600 dark:text-amber-400"
+              )}
             >
               {card.value}
             </CardTitle>
             <CardAction>
-              <card.icon
-                className={
+              <div
+                className={cn(
+                  "flex size-9 items-center justify-center rounded-full",
                   card.alert
-                    ? "size-5 text-amber-600 dark:text-amber-400"
-                    : "size-5 text-muted-foreground"
-                }
-              />
+                    ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                    : "bg-primary/10 text-primary"
+                )}
+              >
+                <card.icon className="size-4.5" />
+              </div>
             </CardAction>
           </CardHeader>
           <CardContent>
