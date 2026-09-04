@@ -4,6 +4,8 @@ A lightweight operations dashboard for tracking inventory levels, spotting low-s
 
 Built with Next.js (App Router), Tailwind CSS, shadcn/ui, and the official [`airtable`](https://github.com/Airtable/airtable.js) JavaScript SDK.
 
+**Live demo:** [ops-inventory-reorder-dashboard.vercel.app](https://ops-inventory-reorder-dashboard.vercel.app) (runs in Demo Mode with sample data until Airtable credentials are configured on the deployment).
+
 ## Features
 
 - **Summary metrics**: total inventory value, total SKUs, and low-stock alert count.
