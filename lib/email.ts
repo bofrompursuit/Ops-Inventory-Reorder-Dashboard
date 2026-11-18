@@ -5,9 +5,21 @@ export interface ReorderLineItem {
   recommendedQuantity: number
 }
 
+// Days of stock to hold after a delivery lands, on top of the lead time.
+const COVER_DAYS = 21
+
 export function getRecommendedReorderQuantity(item: InventoryItem): number {
+  if (item.dailyUsage && item.leadTimeDays) {
+    const target = Math.ceil(item.dailyUsage * (item.leadTimeDays + COVER_DAYS))
+    return Math.max(target - item.quantity, 1)
+  }
   const target = item.reorderThreshold * 2
   return Math.max(target - item.quantity, item.reorderThreshold, 1)
+}
+
+export function getDaysOfCover(item: InventoryItem): number | null {
+  if (!item.dailyUsage) return null
+  return item.quantity / item.dailyUsage
 }
 
 export function groupItemsBySupplier(

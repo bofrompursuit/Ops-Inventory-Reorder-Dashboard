@@ -6,6 +6,12 @@ export interface InventoryItem {
   reorderThreshold: number
   unitPrice: number
   supplierEmail: string
+  // Optional ops context. Mirrors the planned Snowflake INVENTORY columns;
+  // Airtable records may not have them, so every consumer needs a fallback.
+  category?: string
+  warehouse?: string
+  dailyUsage?: number
+  leadTimeDays?: number
 }
 
 export type InventoryStatus = "low-stock" | "in-stock"
@@ -16,6 +22,13 @@ export function getInventoryStatus(item: InventoryItem): InventoryStatus {
 
 export function getInventoryTotalValue(item: InventoryItem): number {
   return item.quantity * item.unitPrice
+}
+
+export type StockState = "out-of-stock" | "low-stock" | "in-stock"
+
+export function getStockState(item: InventoryItem): StockState {
+  if (item.quantity <= 0) return "out-of-stock"
+  return getInventoryStatus(item)
 }
 
 export interface InventorySummary {

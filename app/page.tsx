@@ -6,5 +6,5 @@ export const dynamic = "force-dynamic"
 export default async function DashboardPage() {
   const initialData = await getInventoryItems()
 
-  return <DashboardShell initialData={initialData} />
+  return <DashboardShell initialData={initialData} page="dashboard" />
 }

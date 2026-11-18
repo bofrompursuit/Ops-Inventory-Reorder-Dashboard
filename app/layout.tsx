@@ -18,15 +18,25 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ops Inventory & Reorder Dashboard",
   description: "Track inventory levels, spot low stock, and generate supplier reorder emails.",
+  applicationName: "Ops Inventory",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
-    title: "Inventory",
+    statusBarStyle: "black-translucent",
+    title: "Ops Inventory",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#4F46E5",
+  themeColor: "#171717",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
